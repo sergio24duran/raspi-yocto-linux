@@ -1,0 +1,11 @@
+[submodule "linuxpi/poky"]
+	path = linuxpi/poky
+	url = git://git.yoctoproject.org/poky.git
+	branch = kirkstone
+[submodule "linuxpi/meta-raspberrypi"]
+	path = linuxpi/meta-raspberrypi
+	url = https://git.yoctoproject.org/meta-raspberrypi
+	branch = kirkstone
+[submodule "linuxpi/meta-sdraspi"]
+	path = linuxpi/meta-sdraspi
+	url = git@gitlab.com:sdyocto/meta-sdraspi.git
