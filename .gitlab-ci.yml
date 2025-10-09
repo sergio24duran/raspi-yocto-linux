@@ -7,8 +7,7 @@ mirror_develop_to_github:
   rules:
     - if: '$CI_COMMIT_BRANCH == "develop"'
   before_script:
-    - apk add --no-cache git
-    # Configure user for automatic commits
+    - apk add --no-cache git sed
     - git config --global user.email "ci@gitlab.com"
     - git config --global user.name "GitLab CI"
   script:
@@ -16,8 +15,17 @@ mirror_develop_to_github:
     - git remote remove github || true
     # Add GitHub remote using variables
     - git remote add github https://oauth2:${GITHUB_TOKEN}@${GITHUB_REPO_URL#https://}
+
     # Create local 'develop' branch pointing to current commit
     - git checkout -B develop
-    # Force push the 'develop' branch to GitHub
+
+    # --- 🔄 Rewrite .gitmodules ---
+    # Replace all GitLab URLs with GitHub URLs, keeping the same path
+    - sed -i 's@git@gitlab.com:@https://github.com/@g' .gitmodules
+
+    # Stage and commit the modified .gitmodules (commit only exists in the mirror)
+    - git add .gitmodules
+    - git commit -m "Update submodule URLs for GitHub mirror" || true
+
+    # --- 🚀 Force push to GitHub ---
     - git push --force github develop
-    
