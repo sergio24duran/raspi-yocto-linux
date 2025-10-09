@@ -20,8 +20,8 @@ mirror_develop_to_github:
     - git checkout -B develop
 
     # --- Rewrite GitLab submodule URLs to GitHub ---
-    # This keeps only the project name and maps it to your GitHub username
-    - sed -E -i "s#(git@|https://)gitlab.com[:/][^ ]*/([^/]+)\.git#https://github.com/${GITHUB_USERNAME}/\2.git#g" .gitmodules
+    # Capture only the project name and prepend your GitHub username
+    - sed -E -i 's#(git@|https://)gitlab.com[:/][^ ]*/([^/]+)\.git#https://github.com/sergio24duran/\2.git#g' .gitmodules
 
     # Stage and commit the modified .gitmodules (commit only exists in the mirror)
     - git add .gitmodules
