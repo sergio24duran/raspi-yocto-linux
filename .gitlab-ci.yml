@@ -19,13 +19,15 @@ mirror_develop_to_github:
     # Create local 'develop' branch pointing to current commit
     - git checkout -B develop
 
-    # --- 🔄 Rewrite .gitmodules ---
-    # Replace all GitLab URLs with GitHub URLs, keeping the same path
-    - sed -i 's@git@gitlab.com:@https://github.com/@g' .gitmodules
+    # --- Rewrite only GitLab submodule URLs ---
+    # Replace SSH GitLab URLs with GitHub HTTPS equivalents
+    - sed -i 's#git@gitlab.com:#https://github.com/#g' .gitmodules
+    # (Optional) If you also have https://gitlab.com/... style URLs:
+    - sed -i 's#https://gitlab.com/#https://github.com/#g' .gitmodules
 
     # Stage and commit the modified .gitmodules (commit only exists in the mirror)
     - git add .gitmodules
     - git commit -m "Update submodule URLs for GitHub mirror" || true
 
-    # --- 🚀 Force push to GitHub ---
+    # Force push to GitHub
     - git push --force github develop
