@@ -133,3 +133,9 @@ echo ""
 
 echo "   # Generate generic host toolchain (legacy)"
 echo "   bitbake meta-toolchain"
+echo ""
+
+echo "   # Enter to Kernel visual menu conf"
+echo "   bitbake virtual/kernel -c menuconfig"
+echo ""
+
