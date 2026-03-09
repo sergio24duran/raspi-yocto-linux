@@ -8,4 +8,4 @@
 	branch = kirkstone
 [submodule "linuxpi/meta-sdraspi"]
 	path = linuxpi/meta-sdraspi
-	url = git@gitlab.com:sdyocto/meta-sdraspi.git
+	url = https://github.com/sergio24duran/meta-sdraspi.git
